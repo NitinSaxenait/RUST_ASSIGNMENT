@@ -61,7 +61,7 @@ pub fn linearsearch(arr:&[i32] ,search: i32,value: i32)
 fn leapyear() {
 
    println!("Question 3 answer");
-   let tuple=(5,6,2021);
+   let tuple=(25,02,2021);
    let mut count = 0;
 
 if tuple.2%4==0
