@@ -80,5 +80,36 @@ if tuple.2%4==0
    println!("{}",count);
 }
 
+//merge sort 
+/*fn mergesort(arr:i32){
+   let i=0;
+   if arr.len<1
+   {
+      return;
+   }
+   let midpoint=arr.len/2;
+   let mut left_arr: [i32]=midpoint;
+   let mut right_arr: [i32];
+   if arr.len % 2==0
+   {
+      right_arr=midpoint;
+   }
+   else {
+      right_arr=midpoint+1;
+   }
+   while i<midpoint {
+      left_arr= arr: [i32];
+
+   }
+
+   while i<midpoint {
+
+   }
+   left_arr=mergesort(left_arr);
+   
+   
+   
+}
+*/
 
 
