@@ -1,5 +1,6 @@
 //
-// this function is used to match pattern on a string.
+// function pattern_match match the input pattern on a input string.
+//
 // #Arguments
 //
 // string:str a input string which will contain the pattern.
