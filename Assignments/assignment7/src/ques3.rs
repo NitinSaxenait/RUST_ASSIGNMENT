@@ -1,7 +1,7 @@
 //
-// this function is comparing strings character according to their order.
+// Function is comparing strings character according to their order.
 //
-// this will compare index of three string and return them according to small or big char.
+// Function will compare index of three string and return them according to small or big char.
 // using match function it will iterate for even and odd value
 //
 // for true return small character
