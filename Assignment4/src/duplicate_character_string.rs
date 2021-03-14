@@ -1,12 +1,14 @@
-// code to find the repeated character in a string
+// count_same_characters is used to find the duplicate characters(Repeatble characters) in a string.
 //
 // #Arguements
 //
-// a string is taken as a parameter to verify whether it has duplicate char or not
+// -> input_string: is takes as a argument in which duplication is checked.
 //
 // #Return
+// 
+// -> String:
 //
-// return a string a final output
+// function is going to return a String type as a final_output.
 pub fn count_same_characters(input_string: &str) -> String {
         let mut vector_chars: Vec<char> = input_string.chars().collect();
         let mut initial_index = 0;
@@ -28,7 +30,7 @@ pub fn count_same_characters(input_string: &str) -> String {
             }
             initial_index += 1;
         }
-        return final_output;
+        final_output;
     }
 
 
