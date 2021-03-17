@@ -1,5 +1,5 @@
-/// Function -> handling_error is used here to handle error on -> taken_number from function -> matching_result.
-/// To handle error : Whether taken_number is even or not.
+/// Function -> handling_error is used here to handle error on the input argument.
+/// Used to handle error : Whether taken_number is even or not.
 ///
 /// #Arguments
 ///
@@ -7,7 +7,7 @@
 ///
 /// #Return
 ///
-/// Function handling_error is returning a Result<String,String>type  for a number is even or not even.
+/// Function handling_error is returning a Result<String,String>type  for a number which is even or not even.
 fn handling_error(taken_number: i32) -> Result<String, String> {
     if taken_number % 2 == 0 {
         Ok("EVEN Number".to_string())
@@ -15,7 +15,7 @@ fn handling_error(taken_number: i32) -> Result<String, String> {
         Err("NOT EVEN Number".to_string())
     }
 }
-/// Function matching_result is matching the -> output of function -> handling_error to Okk or Err.
+/// Function matching_result is matching the output result with Ok or Err condtion.
 ///
 /// #Arguments
 ///
