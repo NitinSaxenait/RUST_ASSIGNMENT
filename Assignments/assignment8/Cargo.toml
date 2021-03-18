@@ -1,0 +1,8 @@
+[package]
+name = "assignment8"
+version = "0.1.0"
+authors = ["Nitin Saxena <Nitin.Saxena@knoldus.com>"]
+edition = "2018"
+
+
+[dependencies]
