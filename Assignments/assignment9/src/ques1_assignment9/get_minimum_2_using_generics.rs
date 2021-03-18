@@ -1,7 +1,5 @@
 /// Function -> find_minimum is used here to find the minimum of two ->input generic value.
 ///
-/// used generic can take any type value work as a ->super set.
-//
 /// #Arguments
 ///
 /// collect1 -> = generic value one collected from get_values function.
@@ -29,7 +27,6 @@ pub fn find_minimum_value<'a, T: std::cmp::PartialOrd>(collect1: &'a T, collect2
 /// #Return
 ///
 /// Function get_values returning a -> string type as the minimum value of two.
-/// returning -> The minimum of two no is {}.
 
 pub fn get_values(take_input1: i32, take_input2: i32) -> String {
     let got_output = find_minimum_value(&take_input1, &take_input2);
