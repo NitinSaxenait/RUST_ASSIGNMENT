@@ -1,10 +1,10 @@
-/// Functions -> generic_sorting is used here for sorting any type (generic type) ->list.
+/// Functions generic_sorting is used here for sorting any type (generic type) list.
 ///
-/// Function generic_sorting is -> generic here. <T>
+/// Function generic_sorting is generic here. <T>
 ///
 /// #Arguments
 ///
-/// -> input_list : a generic list which will take any type (character,integer or float).
+/// input_list : a generic list which will take any type (character,integer or float).
 ///
 /// #Return
 ///
