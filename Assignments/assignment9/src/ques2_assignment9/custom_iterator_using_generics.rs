@@ -15,17 +15,13 @@ pub trait Iterator {
 ///
 /// based on  -> a,ar,ar^2,ar^3
 ///
-/// where first_number is a
-/// and current number is total elements.
-/// ratio is current_number/first_number
-///
 /// #Arguments
 ///
 /// -> &self is taking variants of struct Geometric_Series.
 ///
 /// #Return
 ///
-/// A -> Vec<i32> is returns as geometric series pattern.
+/// A -> Vec<i32> returns as geometric series pattern.
 
 impl Iterator for GeometricSeries {
     fn geometric_series(&self) -> Vec<i32> {
