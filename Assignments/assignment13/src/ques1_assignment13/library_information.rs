@@ -17,7 +17,7 @@ impl BookInformation {
     ///
     /// #Return
     ///
-    /// no return from function.
+    /// Result type returning book information if library not empty or returning library is empty.
     pub fn display_book_information(&self) -> Result<bool, i32> {
         if self.accession_number.is_empty() {
             return Err(0);
@@ -38,7 +38,7 @@ impl BookInformation {
     ///
     /// #Return
     ///
-    /// no return from function.
+    /// String type returning as Added Successfully.
     pub fn add_new_book(&mut self, new_book: BookInformation) -> String {
         self.accession_number.push(new_book.accession_number[0]);
         let take_book_title = new_book.book_title[0].clone();
@@ -56,7 +56,7 @@ impl BookInformation {
     ///
     /// #Return
     ///
-    /// no return from function.
+    /// Function is returning a Result type for number of books by particular author or no book.
     pub fn display_book_by_author(&self, author_name: String) -> Result<bool, i32> {
         if !self.author_name.contains(&author_name) {
             warn!("No book available by this author");
@@ -80,7 +80,7 @@ impl BookInformation {
     ///
     /// #Return
     ///
-    /// a i32 type is returning number of books of a particular title.
+    /// Function is returning a Result type for number of books of a particular title or not available.
     pub fn display_book_by_title(&self, book_title: String) -> Result<i32, String> {
         let mut count = 0;
         if !self.book_title.contains(&book_title) {
@@ -103,7 +103,7 @@ impl BookInformation {
     ///
     /// #Return
     ///
-    /// a i32 type returning the no of books available.
+    /// Function is returning a Result type for number of books available or library empty.
     pub fn total_books_in_library(&self) -> Result<i32, i32> {
         let mut count = 0;
 
@@ -128,7 +128,7 @@ impl BookInformation {
     ///
     /// #Return
     ///
-    /// a i32 type returning whether the particular book is issued or not.
+    /// Function is returning a Result type as book is issued or no available for issue.
     pub fn issue_book(&mut self, book_title: String) -> Result<i32, String> {
         let mut available = 0;
         for index in 0..self.accession_number.len() {
