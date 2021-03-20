@@ -1,5 +1,5 @@
 use log::*;
-/// BookInformation a struct type containing 2 variant of Vce<u32> type and 2 of Vec<String> type.
+/// BookInformation a struct type containing 2 variant of Vec<u32> type and 2 of Vec<String> type.
 pub struct BookInformation {
     pub accession_number: Vec<u32>,
     pub author_name: Vec<String>,
@@ -18,13 +18,17 @@ impl BookInformation {
     /// #Return
     ///
     /// no return from function.
-    pub fn display_book_information(&self) {
+    pub fn display_book_information(&self) -> Result<bool, i32> {
+        if self.accession_number.is_empty() {
+            return Err(0);
+        }
         for index in 0..self.accession_number.len() {
             info!("Author Name {}", self.author_name[index]);
             info!("Book Title {}", self.book_title[index]);
             info!("Accession Number {}", self.accession_number[index]);
             info!("Book is issued or not {}", self.book_issued[index])
         }
+        Ok(true)
     }
     /// Function add_new_book is adding/inserting a new book in the collection of library.
     ///
@@ -35,14 +39,14 @@ impl BookInformation {
     /// #Return
     ///
     /// no return from function.
-    pub fn add_new_book(&mut self, new_book: BookInformation) {
+    pub fn add_new_book(&mut self, new_book: BookInformation) -> String {
         self.accession_number.push(new_book.accession_number[0]);
         let take_book_title = new_book.book_title[0].clone();
         self.book_title.push(take_book_title);
         let take_author_name = new_book.author_name[0].clone();
         self.author_name.push(take_author_name);
         self.book_issued.push(new_book.book_issued[0]);
-        info!("New Book Added");
+        String::from("Added Successfully")
     }
     /// Function display_book_by_author is displaying book from struct by a particular author.
     ///
@@ -53,9 +57,10 @@ impl BookInformation {
     /// #Return
     ///
     /// no return from function.
-    pub fn display_book_by_author(&self, author_name: String) {
+    pub fn display_book_by_author(&self, author_name: String) -> Result<bool, i32> {
         if !self.author_name.contains(&author_name) {
             warn!("No book available by this author");
+            return Err(0);
         }
         for index in 0..self.accession_number.len() {
             if self.author_name[index] == author_name {
@@ -65,6 +70,7 @@ impl BookInformation {
                 info!("Issued Or Not {}", self.book_issued[index]);
             }
         }
+        Ok(true)
     }
     /// Function display_book_by_title is displaying the book based on the title of the book.
     ///
@@ -75,10 +81,11 @@ impl BookInformation {
     /// #Return
     ///
     /// a i32 type is returning number of books of a particular title.
-    pub fn display_book_by_title(&self, book_title: String) -> i32 {
+    pub fn display_book_by_title(&self, book_title: String) -> Result<i32, String> {
         let mut count = 0;
         if !self.book_title.contains(&book_title) {
-            warn!("Book {} is not available", book_title)
+            warn!("Book {} is not available", book_title);
+            return Err(String::from("This book is not available in Library"));
         }
         for index in 0..self.accession_number.len() {
             if self.book_title[index] == book_title {
@@ -86,7 +93,7 @@ impl BookInformation {
             }
         }
         info!("Number of books by this title are {}", count);
-        count
+        Ok(count)
     }
     /// Function total_books_in_library is calculating the number of books present at the moment in library.
     ///
@@ -97,11 +104,12 @@ impl BookInformation {
     /// #Return
     ///
     /// a i32 type returning the no of books available.
-    pub fn total_books_in_library(&self) -> i32 {
+    pub fn total_books_in_library(&self) -> Result<i32, i32> {
         let mut count = 0;
 
         if self.accession_number.is_empty() {
             info!("No books.Please provide some");
+            return Err(0);
         } else {
             for index in 0..self.accession_number.len() {
                 if self.book_issued[index] == 0 {
@@ -110,7 +118,7 @@ impl BookInformation {
             }
             info!("Total number of books in Library {}", count);
         }
-        count
+        Ok(count)
     }
     /// Function issue_book is issuing the books if present and if available at the moment in library.
     ///
@@ -121,7 +129,7 @@ impl BookInformation {
     /// #Return
     ///
     /// a i32 type returning whether the particular book is issued or not.
-    pub fn issue_book(&mut self, book_title: String) -> i32 {
+    pub fn issue_book(&mut self, book_title: String) -> Result<i32, String> {
         let mut available = 0;
         for index in 0..self.accession_number.len() {
             if self.book_issued[index] == 0 && self.book_title[index] == book_title {
@@ -131,8 +139,9 @@ impl BookInformation {
             }
         }
         if available == 0 {
-            info!("Book is not available")
+            info!("Book is not available");
+            return Err(String::from("Book is already with someone else"));
         }
-        available
+        Ok(available)
     }
 }
