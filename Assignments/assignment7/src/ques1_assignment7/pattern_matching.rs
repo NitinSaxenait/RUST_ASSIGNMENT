@@ -1,3 +1,4 @@
+use log::*;
 /// Function match_pattern is used to match (input pattern) over (input string).
 ///
 /// #Arguments
@@ -7,8 +8,8 @@
 ///
 /// #Return
 ///
-/// match_pattern function will return a -> String of "pattern matched at index or not matched".
-pub fn match_pattern(string: &str, pattern: &str) -> String {
+/// a Result returning a string type as pattern found at index or pattern not found.
+pub fn match_pattern(string: &str, pattern: &str) -> Result<String, String> {
     let collect_string: Vec<char> = string.chars().collect();
     let collect_pattern: Vec<char> = pattern.chars().collect();
     let mut count = 0;
@@ -22,11 +23,13 @@ pub fn match_pattern(string: &str, pattern: &str) -> String {
                 count += 1;
             }
             if count == collect_pattern.len() {
-                return format!("pattern found at index {}", index);
+                info!("Pattern found successfully");
+                return Ok(format!("pattern found at index {}", index));
             }
             take_index_value += 1;
         }
         count = 0;
     }
-    "pattern is not present in given string".to_string()
+    warn!("Pattern not found");
+    Err("pattern is not present in given string".to_string())
 }

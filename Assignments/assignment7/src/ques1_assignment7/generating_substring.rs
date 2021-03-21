@@ -1,3 +1,4 @@
+use ::log::*;
 /// Function -> generate_substring is (generating subsets) of a -> input_string.
 ///
 /// In form  => ap -> a , p, ap
@@ -25,6 +26,7 @@ pub fn generate_substring(input_string: &str) -> Vec<String> {
             take_travel = string_vector[travel].to_string();
             concatenate = take_count + &*take_travel;
             take_result.push(concatenate);
+            info!("Subsets are generated for this string");
         }
     }
 

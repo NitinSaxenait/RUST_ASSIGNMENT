@@ -29,38 +29,44 @@ mod test {
     }
 
     #[test]
-    fn pattern_matched_success() {
+    fn pattern_matching_success() {
         assert_eq!(
             match_pattern("pankaj chaudhary", "cha"),
-            "pattern found at index 7".to_string()
+            Ok("pattern found at index 7".to_string())
         );
     }
     #[test]
-    fn matched_pattern_success() {
+    fn pattern_match_success() {
         assert_eq!(
             match_pattern("nitin", "t"),
-            "pattern found at index 2".to_string()
+            Ok("pattern found at index 2".to_string())
         );
     }
 
     #[test]
-    fn pattern_is_success() {
+    fn pattern_matching_failure() {
         assert_eq!(
             match_pattern("iphone", "apple"),
-            "pattern is not present in given string".to_string()
+            Err("pattern is not present in given string".to_string())
         )
     }
 
     #[test]
-    fn comparing_result_success() {
-        assert_eq!(comparing_string("jjdhid", "ikjhjk", "rtysgi"), "itdsgk")
+    fn get_desired_output_success() {
+        assert_eq!(
+            comparing_string("jjdhid", "ikjhjk", "rtysgi"),
+            Some("itdsgk".to_string())
+        )
     }
     #[test]
-    fn comparison_is_success() {
-        assert_eq!(comparing_string("cdef", "aejy", "fahf"), "aeey")
+    fn desired_output_success() {
+        assert_eq!(
+            comparing_string("cdef", "aejy", "fahf"),
+            Some("aeey".to_string())
+        )
     }
     #[test]
-    fn comparison_done_successfully() {
-        assert_eq!(comparing_string("pk", "mh", "az"), "az")
+    fn get_desired_output_failure() {
+        assert_eq!(comparing_string("", "", ""), None)
     }
 }

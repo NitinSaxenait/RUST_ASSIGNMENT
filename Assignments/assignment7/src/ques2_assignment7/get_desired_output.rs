@@ -1,3 +1,4 @@
+use log::*;
 /// Function -> comparing_string is comparing three input strings characters in sequence and returning the desired output.
 ///
 /// Function will compare index of three string and return them according to small or big characters.
@@ -10,8 +11,12 @@
 ///
 /// #Return
 ///
-/// comparing_string function is going to return a -> String of compared result.
-pub fn comparing_string(string1: &str, string2: &str, string3: &str) -> String {
+/// a Option type returning a String as compared string or None if string 1,2,3 is empty.
+pub fn comparing_string(string1: &str, string2: &str, string3: &str) -> Option<String> {
+    if string1.is_empty() && string2.is_empty() && string3.is_empty() {
+        warn!("All three strings are empty");
+        return None;
+    }
     let mut string_output: Vec<char> = Vec::new();
     let mut index = 0;
     let mut even_odd = 0;
@@ -52,6 +57,6 @@ pub fn comparing_string(string1: &str, string2: &str, string3: &str) -> String {
         index += 1;
     }
     let final_result: String = string_output.iter().collect();
-
-    final_result
+    info!("The compared string is final result.");
+    Some(final_result)
 }
