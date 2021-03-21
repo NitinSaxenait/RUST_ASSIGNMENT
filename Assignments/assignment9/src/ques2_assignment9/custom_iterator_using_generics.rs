@@ -21,7 +21,7 @@ pub trait Iterator {
 ///
 /// #Return
 ///
-/// A -> Vec<i32> returns as geometric series pattern.
+/// A Vec<i32> returns as geometric series pattern.
 
 impl Iterator for GeometricSeries {
     fn geometric_series(&self) -> Vec<i32> {

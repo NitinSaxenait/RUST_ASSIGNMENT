@@ -22,16 +22,22 @@ mod test {
         )
     }
     #[test]
-    fn minimum_came_true() {
-        assert_eq!(get_values(9, 55), "The Minimum of two no is -> 9");
+    fn get_minimum_2_success() {
+        assert_eq!(
+            get_values(9, 55),
+            Some("The Minimum of two no is -> 9".to_string())
+        );
     }
     #[test]
     fn is_minimum() {
-        assert_eq!(get_values(99, 999), "The Minimum of two no is -> 99");
+        assert_eq!(get_values(99, 99), None);
     }
     #[test]
     fn minimum_test_success() {
-        assert_eq!(get_values(124, 1), "The Minimum of two no is -> 1");
+        assert_eq!(
+            get_values(124, 1),
+            Some("The Minimum of two no is -> 1".to_string())
+        );
     }
     #[test]
     fn geometric_series_true() {
