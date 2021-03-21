@@ -1,16 +1,17 @@
-///
-/// make_reverse function is used to reverse a given input_list vec<i32> type
-/// a reverse collector vec<i32> type is used to collect all the reverse values of list.
+/// make_reverse function is used to reverse a list elements.
 ///
 /// #Arguments
 ///
-/// -> input_list is used as a input for the function which consists all i32 type values in list.
+/// input_list a list containing i32 type elements which are to be reversed.
 ///
 /// #Return
 ///
-/// Function is returning a Vec<i32> type.
+/// function is returning a reverse list or String as Empty list.
 
-pub fn make_reverse(input_list: &[i32]) -> Vec<i32> {
+pub fn make_reverse(input_list: &[i32]) -> Result<Vec<i32>, String> {
+    if input_list.is_empty() {
+        return Err(String::from("Empty list"));
+    }
     let mut list_length = input_list.len();
     let mut reverse_collector: Vec<i32> = Vec::new();
     for _index in 0..input_list.len() {
@@ -18,5 +19,5 @@ pub fn make_reverse(input_list: &[i32]) -> Vec<i32> {
         reverse_collector.push(input_list[list_length]);
     }
 
-    reverse_collector
+    Ok(reverse_collector)
 }

@@ -1,19 +1,18 @@
-///
-/// first_even function is only taking the first even number from the given list of sequence.
-/// checking the first even number using the even condition for every element until it found the first even element
+/// find_first_even function is finding the first even number from the given list of elements.
 ///
 /// #Arguments
 ///
-/// -> input_list as a Vector<i32> type list of elements.
+/// seq a i32 type list containing elements.
 ///
 /// #Return
 ///
-/// function first_even is returning a i32 type value as first even number from the given list of sequence.
-///
-/// Use logger to collect value.
-pub fn first_even(seq: &[i32]) -> i32 {
+/// Option type containing Some even number or None for empty list.
+pub fn find_first_even(seq: &[i32]) -> Option<i32> {
     let mut index = 0;
     let value;
+    if seq.is_empty() {
+        return None;
+    }
     loop {
         if seq[index] % 2 == 0 {
             value = seq[index];
@@ -22,5 +21,5 @@ pub fn first_even(seq: &[i32]) -> i32 {
         index += 1;
     }
     log::info!("List : {}", value);
-    value
+    Some(value)
 }

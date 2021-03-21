@@ -5,14 +5,16 @@ use std::collections::HashMap;
 /// #Arguments
 ///
 /// -> input_map is used to take string type value and a i32 type value.
-///
 /// -> string  : type is used here to provide the pattern to match.
 ///
 /// #Return
 ///
-/// sum_conditional is return the collect_value.
-pub fn sum_conditional(input_map: HashMap<&str, i32>, string: &str) -> i32 {
+/// function is returning a Option as i32 value.
+pub fn sum_conditional(input_map: HashMap<&str, i32>, string: &str) -> Option<i32> {
     let mut collect_value = 0;
+    if input_map.is_empty() {
+        return None;
+    }
     let new_regrex = Regex::new(&*(r"".to_owned() + string)).unwrap();
     for person in input_map {
         if new_regrex.is_match(person.0) {
@@ -20,5 +22,5 @@ pub fn sum_conditional(input_map: HashMap<&str, i32>, string: &str) -> i32 {
         }
     }
 
-    collect_value
+    Some(collect_value)
 }

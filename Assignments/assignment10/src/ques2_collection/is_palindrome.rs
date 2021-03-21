@@ -1,15 +1,14 @@
-///
-/// if_palindrome function is taking input and checking if the given input_list  is making palindrome or not.
+/// if_palindrome function is taking input list and checking if it is making palindrome or not.
 ///
 /// #Arguments
 ///
-///  input_list -> a i32 type vector list is used as a input
+///  input_list -> a list containing i32 type elements.
 ///
 /// #Return
 ///
-/// function is returning a -> String type for Makes Palindrome or No.
+/// Result type returning string for palindrome and string for no palindrome.
 
-pub fn if_palindrome(input_list: &[i32]) -> String {
+pub fn if_palindrome(input_list: &[i32]) -> Result<String, String> {
     let mut list_length = input_list.len();
 
     for index in 0..input_list.len() {
@@ -18,10 +17,9 @@ pub fn if_palindrome(input_list: &[i32]) -> String {
         let end = input_list[list_length];
 
         if start != end {
-            String::from("No");
-            break;
+            return Err(String::from("No"));
         }
     }
 
-    String::from("Makes Palindrome")
+    Ok(String::from("Makes Palindrome"))
 }

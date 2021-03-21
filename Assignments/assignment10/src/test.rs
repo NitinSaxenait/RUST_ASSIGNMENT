@@ -1,119 +1,109 @@
 #[cfg(test)]
 mod tests {
+    use crate::ques1_collection::hasmap_::sum_conditional;
     use crate::ques2_collection::add_duplicate::add_duplicate;
     use crate::ques2_collection::drop_from_vector::drop_from_list;
-    use crate::ques2_collection::first_even_number::first_even;
-
-    use crate::ques1_collection::hasmap_::sum_conditional;
+    use crate::ques2_collection::first_even_number::find_first_even;
     use crate::ques2_collection::is_palindrome::if_palindrome;
     use crate::ques2_collection::remove_continous_sequence::remove_continous_value;
     use crate::ques2_collection::reverse_list::make_reverse;
     use std::collections::HashMap;
 
-    /// test cases for all the functions of collections questions
+    #[test]
+
+    fn if_palindrome_success() {
+        assert_eq!(
+            if_palindrome(&vec![1, 5, 1]),
+            Ok("Makes Palindrome".to_string())
+        );
+    }
+    #[test]
+    fn if_palindrome_failure() {
+        assert_eq!(if_palindrome(&vec![1, 5, 4, 1]), Err("No".to_string()));
+    }
 
     #[test]
-    /// for palindrome_true
-    fn palindrome_true() {
-        assert_eq!(if_palindrome(&vec![1, 5, 1]), "Makes Palindrome");
+    fn make_reverse_success() {
+        assert_eq!(make_reverse(&vec![1, 2, 3]), Ok(vec![3, 2, 1]));
     }
     #[test]
-    fn palindrome_is_true() {
-        assert_eq!(if_palindrome(&vec![1, 5, 4, 1]), "Makes Palindrome");
+    fn make_reverse_failure() {
+        assert_eq!(make_reverse(&vec![]), Err("Empty list".to_string()));
     }
-    /// checking for reverse is true
+
     #[test]
-    fn reverse_true() {
-        assert_eq!(make_reverse(&vec![1, 2, 3]), [3, 2, 1]);
-    }
-    #[test]
-    fn reverse_is_true() {
-        assert_eq!(make_reverse(&vec![1, 2, 3, 4, 5, 6]), [6, 5, 4, 3, 2, 1]);
-    }
-    /// test for checking if first value is even or not.
-    #[test]
-    fn first_even_true() {
-        assert_eq!(first_even(&vec![4, 6, 8, 9]), 4);
+    fn find_first_even_success() {
+        assert_eq!(find_first_even(&vec![4, 6, 8, 9]), Some(4));
     }
     #[test]
-    fn first_even_is_true() {
-        assert_eq!(first_even(&vec![10, 11, 21, 32]), 10);
+    fn find_first_even_failure() {
+        assert_eq!(find_first_even(&vec![]), None);
     }
-    /// test to check if value is removed or not successfully.
+
     #[test]
-    fn remove_is_true() {
+    fn remove_continous_success() {
         assert_eq!(
             remove_continous_value(&mut vec![1, 1, 1, 1, 2, 3, 3, 1, 1, 4, 5, 5, 5, 5]),
-            [1, 2, 3, 1, 4, 5]
+            Some(vec![1, 2, 3, 1, 4, 5])
         );
     }
 
     #[test]
-    fn continous_values_removed() {
-        assert_eq!(
-            remove_continous_value(&mut vec![1, 1, 2, 3, 4, 4, 5]),
-            [1, 2, 3, 4, 5]
-        );
+    fn remove_continous_failure() {
+        assert_eq!(remove_continous_value(&mut vec![]), None);
     }
-    /// test for adding duplicate values in input vectors.
+
     #[test]
     fn adding_duplicates() {
         assert_eq!(
             add_duplicate(&mut vec![1, 2, 3, 3, 4]),
-            [1, 1, 2, 2, 3, 3, 3, 3, 4, 4]
+            Ok(vec![1, 1, 2, 2, 3, 3, 3, 3, 4, 4])
         );
     }
     #[test]
-    fn adding_duplicate_values() {
-        assert_eq!(
-            add_duplicate(&mut vec![1, 2, 3, 3, 4]),
-            [1, 1, 2, 2, 3, 3, 3, 3, 4, 4]
-        );
+    fn adding_duplicate_failure() {
+        assert_eq!(add_duplicate(&mut vec![]), Err(0));
     }
-    /// test for check if value is removed from vector successfully or not.
+
     #[test]
-    fn value_removed() {
+    fn drop_from_list_success() {
         assert_eq!(
             drop_from_list(5, &mut vec![1, 2, 3, 4, 5]),
-            &mut [1, 2, 3, 4]
+            Ok(&mut vec![1, 2, 3, 4])
         );
     }
     #[test]
-    fn value_dropped() {
+    fn drop_from_list_failure() {
         assert_eq!(
-            drop_from_list(3, &mut vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]),
-            &mut [1, 2, 4, 5, 6, 7, 8, 9, 10, 11]
+            drop_from_list(3, &mut vec![]),
+            Err("Sorry,your list is empty.".to_string())
         );
     }
     /// test cases defined for hashmap function.
     #[test]
-    fn sum_true() {
+    fn sum_conditional_success() {
         let mut take_value = HashMap::new();
         take_value.insert("chaman", 20);
         take_value.insert("naman", 19);
         take_value.insert("ankur", 30);
         take_value.insert("kusum", 25);
         take_value.insert("love", 18);
-        assert_eq!(sum_conditional(take_value, "an"), 69);
+        assert_eq!(sum_conditional(take_value, "an"), Some(69));
     }
     #[test]
-    fn sum_age_true() {
+    fn sum_conditional_failure() {
         let mut take_value = HashMap::new();
-        take_value.insert("devanshi", 20);
-        take_value.insert("priyanshi", 19);
-        take_value.insert("ankur", 30);
-        take_value.insert("kusum", 25);
-        take_value.insert("love", 18);
-        assert_eq!(sum_conditional(take_value, "shi"), 39);
+
+        assert_eq!(sum_conditional(take_value, "shi"), None);
     }
     #[test]
-    fn sum_is_true() {
+    fn sum_conditional_true() {
         let mut take_value = HashMap::new();
         take_value.insert("lalu", 20);
         take_value.insert("kalu", 19);
         take_value.insert("molu", 30);
         take_value.insert("kusum", 25);
         take_value.insert("love", 18);
-        assert_eq!(sum_conditional(take_value, "lu"), 69);
+        assert_eq!(sum_conditional(take_value, "lu"), Some(69));
     }
 }
