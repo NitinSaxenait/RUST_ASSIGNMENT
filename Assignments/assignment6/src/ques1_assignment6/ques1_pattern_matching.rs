@@ -1,3 +1,4 @@
+use log::*;
 #[derive(PartialEq, Eq, Debug)]
 /// enum as Coordinates having variants Abscissa and Ordinated.
 pub enum Coordinates {
@@ -14,7 +15,6 @@ pub enum Axis {
     XAxis(Coordinates, Coordinates),
     YAxis(Coordinates, Coordinates),
     Origin(Coordinates, Coordinates),
-    None,
 }
 
 /// Function find_coordinates is used here to match points on axis of graph.
@@ -26,40 +26,43 @@ pub enum Axis {
 /// #Return
 ///
 /// returning Axis as output as position on graph.
-pub fn find_coordinates(takes_points: (i32, i32)) -> Axis {
+pub fn find_coordinates(takes_points: (i32, i32)) -> Result<Axis, String> {
     match takes_points {
-        (input_x, input_y) if input_x > 0 && input_y > 0 => Axis::FirstQuadrant(
+        (input_x, input_y) if input_x > 0 && input_y > 0 => Ok(Axis::FirstQuadrant(
             Coordinates::Abscissa(takes_points.0),
             Coordinates::Ordinate(takes_points.1),
-        ),
+        )),
 
-        (input_x, input_y) if input_x < 0 && input_y > 0 => Axis::SecondQuadrant(
+        (input_x, input_y) if input_x < 0 && input_y > 0 => Ok(Axis::SecondQuadrant(
             Coordinates::Abscissa(takes_points.0),
             Coordinates::Ordinate(takes_points.1),
-        ),
+        )),
 
-        (input_x, input_y) if input_x < 0 && input_y < 0 => Axis::ThirdQuadrant(
+        (input_x, input_y) if input_x < 0 && input_y < 0 => Ok(Axis::ThirdQuadrant(
             Coordinates::Abscissa(takes_points.0),
             Coordinates::Ordinate(takes_points.1),
-        ),
+        )),
 
-        (input_x, input_y) if input_x > 0 && input_y < 0 => Axis::FourthQuadrant(
+        (input_x, input_y) if input_x > 0 && input_y < 0 => Ok(Axis::FourthQuadrant(
             Coordinates::Abscissa(takes_points.0),
             Coordinates::Ordinate(takes_points.1),
-        ),
-        (input_x, input_y) if input_x != 0 && input_y == 0 => Axis::XAxis(
+        )),
+        (input_x, input_y) if input_x != 0 && input_y == 0 => Ok(Axis::XAxis(
             Coordinates::Abscissa(takes_points.0),
             Coordinates::Ordinate(takes_points.1),
-        ),
-        (input_x, input_y) if input_x == 0 && input_y != 0 => Axis::YAxis(
+        )),
+        (input_x, input_y) if input_x == 0 && input_y != 0 => Ok(Axis::YAxis(
             Coordinates::Abscissa(takes_points.0),
             Coordinates::Ordinate(takes_points.1),
-        ),
-        (input_x, input_y) if input_x == 0 && input_y == 0 => Axis::Origin(
+        )),
+        (input_x, input_y) if input_x == 0 && input_y == 0 => Ok(Axis::Origin(
             Coordinates::Abscissa(takes_points.0),
             Coordinates::Ordinate(takes_points.1),
-        ),
+        )),
 
-        _ => Axis::None,
+        _ => {
+            error!("Invalid Points.");
+            Err(String::from("Invalid points."))
+        }
     }
 }

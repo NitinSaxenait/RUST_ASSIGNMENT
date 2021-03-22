@@ -10,7 +10,10 @@ mod test {
         let output1 = (2, 3);
         assert_eq!(
             find_coordinates(output1),
-            Axis::FirstQuadrant(Coordinates::Abscissa(2), Coordinates::Ordinate(3))
+            Ok(Axis::FirstQuadrant(
+                Coordinates::Abscissa(2),
+                Coordinates::Ordinate(3)
+            ))
         );
     }
     #[test]
@@ -18,7 +21,10 @@ mod test {
         let output1 = (-2, 3);
         assert_eq!(
             find_coordinates(output1),
-            Axis::SecondQuadrant(Coordinates::Abscissa(-2), Coordinates::Ordinate(3))
+            Ok(Axis::SecondQuadrant(
+                Coordinates::Abscissa(-2),
+                Coordinates::Ordinate(3)
+            ))
         );
     }
     #[test]
@@ -26,7 +32,10 @@ mod test {
         let output1 = (0, 0);
         assert_eq!(
             find_coordinates(output1),
-            Axis::Origin(Coordinates::Abscissa(0), Coordinates::Ordinate(0))
+            Ok(Axis::Origin(
+                Coordinates::Abscissa(0),
+                Coordinates::Ordinate(0)
+            ))
         );
     }
     #[test]
@@ -34,7 +43,10 @@ mod test {
         let output1 = (4, 0);
         assert_eq!(
             find_coordinates(output1),
-            Axis::XAxis(Coordinates::Abscissa(4), Coordinates::Ordinate(0))
+            Ok(Axis::XAxis(
+                Coordinates::Abscissa(4),
+                Coordinates::Ordinate(0)
+            ))
         );
     }
     #[test]
@@ -42,7 +54,10 @@ mod test {
         let output1 = (0, 9);
         assert_eq!(
             find_coordinates(output1),
-            Axis::YAxis(Coordinates::Abscissa(0), Coordinates::Ordinate(9))
+            Ok(Axis::YAxis(
+                Coordinates::Abscissa(0),
+                Coordinates::Ordinate(9)
+            ))
         );
     }
     #[test]
@@ -50,7 +65,10 @@ mod test {
         let output1 = (5, -9);
         assert_eq!(
             find_coordinates(output1),
-            Axis::FourthQuadrant(Coordinates::Abscissa(5), Coordinates::Ordinate(-9))
+            Ok(Axis::FourthQuadrant(
+                Coordinates::Abscissa(5),
+                Coordinates::Ordinate(-9)
+            ))
         );
     }
 
@@ -58,31 +76,40 @@ mod test {
 
     fn match_input_ip_class_a() {
         let output = match_input_ip(192, 0, 1, 1);
-        assert_eq!(output, IpAddressClasses::ClassC(String::from("192.0.1.1")));
+        assert_eq!(
+            output,
+            Ok(IpAddressClasses::ClassC(String::from("192.0.1.1")))
+        );
     }
 
     #[test]
     fn match_input_ip_class_d() {
         let output = match_input_ip(230, 45, 6, 7);
-        assert_eq!(output, IpAddressClasses::ClassD(String::from("230.45.6.7")));
+        assert_eq!(
+            output,
+            Ok(IpAddressClasses::ClassD(String::from("230.45.6.7")))
+        );
     }
     #[test]
     fn match_input_ip_class_b() {
         let output = match_input_ip(170, 45, 23, 45);
         assert_eq!(
             output,
-            IpAddressClasses::ClassB(String::from("170.45.23.45"))
+            Ok(IpAddressClasses::ClassB(String::from("170.45.23.45")))
         );
     }
 
     #[test]
     fn match_input_ip_class_c() {
         let output = match_input_ip(198, 5, 6, 4);
-        assert_eq!(output, IpAddressClasses::ClassC(String::from("198.5.6.4")));
+        assert_eq!(
+            output,
+            Ok(IpAddressClasses::ClassC(String::from("198.5.6.4")))
+        );
     }
     #[test]
     fn match_input_ip_failure() {
         let output = match_input_ip(777, 877, 1000, 9898);
-        assert_eq!(output, IpAddressClasses::None);
+        assert_eq!(output, Err("Invalid Ip.".to_string()));
     }
 }
