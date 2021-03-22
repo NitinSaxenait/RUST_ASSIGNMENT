@@ -1,105 +1,115 @@
 #[cfg(test)]
-//
-// test cases for both the code
-//
-// 1.pattern_match=> for testing matching coordinates
-// test
+
 mod test {
-    use crate::ques1_pattern_matching::Points;
+    use crate::ques1_assignment6::ques1_pattern_matching::{find_coordinates, Axis, Coordinates};
+    use crate::ques2_assignment6::ques_2_create_enum::{match_input_ip, IpAddressClasses};
 
     #[test]
-    //
-    // test_function-1
-    //
-    fn patter_match_test_paas() {
-        let output1 = Points(-5, -8).find_coordinates();
+
+    fn find_first_coordinates_success() {
+        let output1 = (2, 3);
         assert_eq!(
-            output1,
-            "Position::Third Quadrant(Coordinate::Abscissa -5, Coordinate::Ordinate -8 "
+            find_coordinates(output1),
+            Ok(Axis::FirstQuadrant(
+                Coordinates::Abscissa(2),
+                Coordinates::Ordinate(3)
+            ))
         );
     }
-    //
-    //test_function-2
-    //
     #[test]
-    fn pattern_pass() {
-        let output = Points(2, 5).find_coordinates();
+    fn find_second_coordinates_success() {
+        let output1 = (-2, 3);
         assert_eq!(
-            output,
-            "Position::First Quadrant(Coordinate::Abscissa 2, Coordinate::Ordinate 5 "
+            find_coordinates(output1),
+            Ok(Axis::SecondQuadrant(
+                Coordinates::Abscissa(-2),
+                Coordinates::Ordinate(3)
+            ))
         );
     }
-    //
-    // test_function 3
-    //
     #[test]
-    fn pattern_fail() {
-        let output = Points(-2, 5).find_coordinates();
+    fn find_coordinates_origin_success() {
+        let output1 = (0, 0);
         assert_eq!(
-            output,
-            "Position::Second Quadrant(Coordinate::Abscissa -2, Coordinate::Ordinate 5 "
+            find_coordinates(output1),
+            Ok(Axis::Origin(
+                Coordinates::Abscissa(0),
+                Coordinates::Ordinate(0)
+            ))
         );
     }
-    //
-    // test_function 4
-    //
     #[test]
-    fn pattern_pass_again() {
-        let output = Points(2, -1).find_coordinates();
+    fn find_coordinates_xaxis_success() {
+        let output1 = (4, 0);
         assert_eq!(
-            output,
-            "Position::Fourth Quadrant(Coordinate::Abscissa 2, Coordinate::Ordinate -1 "
+            find_coordinates(output1),
+            Ok(Axis::XAxis(
+                Coordinates::Abscissa(4),
+                Coordinates::Ordinate(0)
+            ))
         );
     }
-    //
-    // test_function 5
-    //
     #[test]
-    fn test_for_origin() {
-        let output = Points(0, 0).find_coordinates();
-        assert_eq!(output, "0 and 0 lies on origin.")
+    fn find_coordinates_yaxis_success() {
+        let output1 = (0, 9);
+        assert_eq!(
+            find_coordinates(output1),
+            Ok(Axis::YAxis(
+                Coordinates::Abscissa(0),
+                Coordinates::Ordinate(9)
+            ))
+        );
+    }
+    #[test]
+    fn find_coordinates_fourth_axis_success() {
+        let output1 = (5, -9);
+        assert_eq!(
+            find_coordinates(output1),
+            Ok(Axis::FourthQuadrant(
+                Coordinates::Abscissa(5),
+                Coordinates::Ordinate(-9)
+            ))
+        );
     }
 
-    // rest test cases are for Second Code
-    //
-    // for ques 2 => for ip address matching
-    //
-    // 4 test cases
-
-    use crate::ques_2_create_enum::{match_input_ip, IpAddressClasses};
-
     #[test]
-    //
-    // test function 6
-    //
-    fn match_ip_true() {
+
+    fn match_input_ip_class_a() {
         let output = match_input_ip(192, 0, 1, 1);
-        assert_eq!(output, IpAddressClasses::ClassC(String::from("192.0.1.1")));
+        assert_eq!(
+            output,
+            Ok(IpAddressClasses::ClassC(String::from("192.0.1.1")))
+        );
     }
-    //
-    // test_function 7
-    //
+
     #[test]
-    fn match_for_true() {
+    fn match_input_ip_class_d() {
         let output = match_input_ip(230, 45, 6, 7);
-        assert_eq!(output, IpAddressClasses::ClassD(String::from("230.45.6.7")));
-    } //
-      // test_function 8
-      //
+        assert_eq!(
+            output,
+            Ok(IpAddressClasses::ClassD(String::from("230.45.6.7")))
+        );
+    }
     #[test]
-    fn match_for_true_again() {
+    fn match_input_ip_class_b() {
         let output = match_input_ip(170, 45, 23, 45);
         assert_eq!(
             output,
-            IpAddressClasses::ClassB(String::from("170.45.23.45"))
+            Ok(IpAddressClasses::ClassB(String::from("170.45.23.45")))
         );
     }
-    //
-    // test_function 9
-    //
+
     #[test]
-    fn ip_match_true() {
+    fn match_input_ip_class_c() {
         let output = match_input_ip(198, 5, 6, 4);
-        assert_eq!(output, IpAddressClasses::ClassC(String::from("198.5.6.4")));
+        assert_eq!(
+            output,
+            Ok(IpAddressClasses::ClassC(String::from("198.5.6.4")))
+        );
+    }
+    #[test]
+    fn match_input_ip_failure() {
+        let output = match_input_ip(777, 877, 1000, 9898);
+        assert_eq!(output, Err("Invalid Ip.".to_string()));
     }
 }
