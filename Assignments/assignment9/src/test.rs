@@ -6,21 +6,22 @@ mod test {
     use crate::ques2_assignment9::custom_iterator_using_generics::Iterator;
     #[test]
     fn sorting_integer_success() {
-        assert_eq!(generic_sorting(&mut [9, 8, 7, 6, 5]), [5, 6, 7, 8, 9]);
+        assert_eq!(generic_sorting(&mut [9, 8, 7, 6, 5]).unwrap(), [5, 6, 7, 8, 9]);
     }
 
     #[test]
     fn sorting_characters_success() {
-        assert_eq!(generic_sorting(&mut ["b", "a"]), ["a", "b"]);
+        assert_eq!(generic_sorting(&mut ["b", "a"]).unwrap(), ["a", "b"]);
     }
 
     #[test]
     fn sorting_double_success() {
         assert_eq!(
-            generic_sorting(&mut [9.0, 8.5, 6.7, 5.2]),
+            generic_sorting(&mut [9.0, 8.5, 6.7, 5.2]).unwrap(),
             [5.2, 6.7, 8.5, 9.0]
         )
     }
+
     #[test]
     fn get_minimum_2_success() {
         assert_eq!(

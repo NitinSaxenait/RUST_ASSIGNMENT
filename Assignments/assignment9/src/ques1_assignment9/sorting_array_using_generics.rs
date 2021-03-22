@@ -1,3 +1,4 @@
+use log::*;
 /// Functions generic_sorting is used here for sorting any type (generic type) list.
 ///
 /// Function generic_sorting is generic here. <T>
@@ -12,7 +13,10 @@
 
 pub fn generic_sorting<T: std::cmp::PartialOrd + std::fmt::Display>(
     input_list: &mut [T],
-) -> &mut [T] {
+) -> Option<&mut [T]> {
+    if input_list.is_empty(){
+        return None;
+    }
     for index in 0..input_list.len() {
         for count in index + 1..input_list.len() {
             if input_list[index] > input_list[count] {
@@ -20,5 +24,6 @@ pub fn generic_sorting<T: std::cmp::PartialOrd + std::fmt::Display>(
             }
         }
     }
-    input_list
+    info!("List sorted successfully.");
+    Some(input_list)
 }
